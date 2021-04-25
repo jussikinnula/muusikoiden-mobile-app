@@ -1,40 +1,37 @@
+import React, { FC } from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
+import styled from 'styled-components/native';
 import { RootStackParamList } from '../types';
 
-export default function NotFoundScreen({
-  navigation,
-}: StackScreenProps<RootStackParamList, 'NotFound'>) {
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Title = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+const ButtonContainer = styled.TouchableOpacity`
+  margin-top: 15px;
+  padding-vertical: 15px;
+`;
+
+const ButtonText = styled.Text`
+  font-size: 14px;
+`;
+
+const NotFoundScreen: FC<StackScreenProps<RootStackParamList, 'NotFound'>> = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>This screen doesn't exist.</Text>
-      <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
-        <Text style={styles.linkText}>Go to home screen!</Text>
-      </TouchableOpacity>
-    </View>
+    <Container>
+      <Title>Näkymää ei löydy</Title>
+      <ButtonContainer onPress={() => navigation.replace('Root')}>
+        <ButtonText>Palaa takaisin</ButtonText>
+      </ButtonContainer>
+    </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  linkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});
+export default NotFoundScreen;
